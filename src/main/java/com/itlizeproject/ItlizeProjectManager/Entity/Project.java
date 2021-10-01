@@ -1,5 +1,7 @@
 package com.itlizeproject.ItlizeProjectManager.Entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -13,12 +15,20 @@ public class Project {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "name")
+    private String name;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "time_created")
+    @DateTimeFormat(pattern = "MM/DD/YYYY")
     private Date timeCreated;
+
+    @Column(name = "time_modified")
+    @DateTimeFormat(pattern = "MM/DD/YYYY")
+    private Date timeModified;
 
     @OneToMany(
             fetch = FetchType.LAZY,
@@ -35,6 +45,10 @@ public class Project {
     public Project() {
     }
 
+    public Project(String projectName) {
+        this.name = projectName;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -47,8 +61,16 @@ public class Project {
         return user;
     }
 
-    public void setUser(User userId) {
+    public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Date getTimeCreated() {
@@ -59,6 +81,14 @@ public class Project {
         this.timeCreated = timeCreated;
     }
 
+    public Date getTimeModified() {
+        return timeModified;
+    }
+
+    public void setTimeModified(Date timeModified) {
+        this.timeModified = timeModified;
+    }
+
     public List<ProjectResource> getResources() {
         return resources;
     }
@@ -66,7 +96,6 @@ public class Project {
     public List<ProjectColumn> getColumns() {
         return columns;
     }
-
 
     public void setResources(List<ProjectResource> resources) {
         this.resources = resources;
