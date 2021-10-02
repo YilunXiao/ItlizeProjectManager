@@ -46,6 +46,7 @@ public class ResourceServiceTest {
         resourceService.deleteOne(resourceService.findCode("R404").getId());
         resourceService.deleteOne(resourceService.findName("R101").getId());
         List<Resource> rList = resourceService.findAll();
+
         Assertions.assertEquals(rList.size(),0);
     }
 
