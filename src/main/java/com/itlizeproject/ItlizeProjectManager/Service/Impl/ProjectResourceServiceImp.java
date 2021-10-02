@@ -34,19 +34,16 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
             throw new Exception("The record exists.");
         }
 
-        ProjectResource pr = new ProjectResource();
-        pr.setProject(project);
-        pr.setResource(resource);
+        ProjectResource pr = new ProjectResource(project,resource);
         List<ProjectResource> pList = project.getResources();
         pList.add(pr);
-        project.setResources(pList);
-        List<ProjectResource> rList = resource.getProjectResources();
-        rList.add(pr);
-        resource.setProjectResources(rList);
-        resourceRepository.save(resource);
+        //project.setResources(pList);
+        //List<ProjectResource> rList = resource.getProjectResources();
+        //rList.add(pr);
+        //resource.setProjectResources(rList);
+        //resourceRepository.save(resource);
         projectRepository.save(project);
-        projectResourceRepository.save(pr);
-
+        //projectResourceRepository.save(pr);
         return true;
     }
     public Integer findId(Integer projectId, Integer resourceId) throws Exception{
@@ -87,16 +84,16 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
             throw new Exception ("Failed. The project-resource relation doesn't exist.");
         }
 
-        Project project = pr.getProject();
-        Resource resource = pr.getResource();
-        List<ProjectResource> pList = project.getResources();
-        pList.remove(pr);
-        project.setResources(pList);
-        List<ProjectResource> rList = resource.getProjectResources();
-        rList.remove(pr);
-        resource.setProjectResources(rList);
-        resourceRepository.save(resource);
-        projectRepository.save(project);
+        //Project project = pr.getProject();
+        //Resource resource = pr.getResource();
+        //List<ProjectResource> pList = project.getResources();
+        //pList.remove(pr);
+        //project.setResources(pList);
+        //List<ProjectResource> rList = resource.getProjectResources();
+        //rList.remove(pr);
+        //resource.setProjectResources(rList);
+        //resourceRepository.save(resource);
+        //projectRepository.save(project);
         projectResourceRepository.deleteById(id);
         return true;
     }

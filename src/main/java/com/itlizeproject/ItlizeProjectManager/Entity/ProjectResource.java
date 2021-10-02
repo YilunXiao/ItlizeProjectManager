@@ -24,6 +24,11 @@ public class ProjectResource {
     public ProjectResource() {
     }
 
+    public ProjectResource(Project p, Resource r) {
+        this.project = p;
+        this.resource = r;
+    }
+
     public Integer getId() {
         return id;
     }

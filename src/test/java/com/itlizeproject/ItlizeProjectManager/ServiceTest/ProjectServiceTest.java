@@ -1,7 +1,6 @@
 package com.itlizeproject.ItlizeProjectManager.ServiceTest;
 
 import com.itlizeproject.ItlizeProjectManager.Entity.Project;
-import com.itlizeproject.ItlizeProjectManager.Entity.Resource;
 import com.itlizeproject.ItlizeProjectManager.Service.ProjectService;
 
 import org.junit.jupiter.api.Assertions;
