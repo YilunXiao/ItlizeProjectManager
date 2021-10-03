@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface ProjectResourceRepository extends JpaRepository<ProjectResource, Integer> {
     ProjectResource findProjectResourceById(Integer id);
     ProjectResource findProjectResourceByProjectAndResource(Project project, Resource resource);
+    ProjectResource findProjectResourceByProjectId(Integer id);
+    ProjectResource findProjectResourceByResourceId(Integer id);
 }
