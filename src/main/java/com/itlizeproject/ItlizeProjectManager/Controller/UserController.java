@@ -27,7 +27,7 @@ public class UserController {
     }
 
     // get one user by id
-    @GetMapping("/users/")
+    @GetMapping("/users/user")
     public User findById(@RequestParam("id") Integer id) {
         return service.findById(id);
     }
@@ -52,5 +52,11 @@ public class UserController {
                        @RequestParam("email") String email,
                        @RequestParam("password") String password) {
         return service.updateUserById(id, name, password, email);
+    }
+
+    // delete a user
+    @DeleteMapping("/users")
+    public void deleteById(@RequestParam("id") Integer id) {
+        service.deleteById(id);
     }
 }

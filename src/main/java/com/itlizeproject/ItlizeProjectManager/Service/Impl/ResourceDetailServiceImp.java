@@ -15,7 +15,7 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
 
     @Override
     public ResourceDetail findById(Integer Id) {
-        return repository.getById(Id);
+        return repository.findById(Id).orElse(null);
     }
 
     @Override
@@ -26,18 +26,34 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
     //TODO
     @Override
     public List<ResourceDetail> findByResource(Integer resourceId) {
-        // return repository.findByResourceId(resourceId);
-        return null;
+        return repository.findResourceDetailByResourceId(resourceId);
     }
-    //TODO
+
     @Override
     public List<ResourceDetail> findByProjectColumn(Integer projectColumnId) {
-        // return repository.findByProjectColumnId(projectColumnId);
-        return null;
+        return repository.findResourceDetailByProjectColumnId(projectColumnId);
+    }
+
+    @Override
+    public ResourceDetail update(Integer id, String description, Integer cost) {
+        ResourceDetail resourceDetail = repository.findById(id).orElse(null);
+        resourceDetail.setDescription(description);
+        resourceDetail.setCost(cost);
+        return repository.save(resourceDetail);
     }
 
     @Override
     public ResourceDetail save(ResourceDetail resourceDetail) {
         return repository.save(resourceDetail);
+    }
+
+    @Override
+    public void delete(ResourceDetail resourceDetail) {
+        repository.delete(resourceDetail);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 }

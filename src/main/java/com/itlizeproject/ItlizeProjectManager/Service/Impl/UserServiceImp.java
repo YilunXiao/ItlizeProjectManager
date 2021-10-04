@@ -10,12 +10,13 @@ import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService {
+
     @Autowired
     private UserRepository repository;
 
     @Override
     public User findById(Integer Id) {
-        return repository.getById(Id);
+        return repository.findById(Id).orElse(null);
     }
 
     @Override

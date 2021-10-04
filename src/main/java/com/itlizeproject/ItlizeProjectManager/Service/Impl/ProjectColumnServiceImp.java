@@ -15,13 +15,12 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
 
     @Override
     public ProjectColumn findById(Integer Id) {
-        return repository.getById(Id);
+        return repository.findById(Id).orElse(null);
     }
 
     @Override
     public List<ProjectColumn> findByProjectId(Integer projectId) {
-        return null;
-        // return repository.findByProjectId(projectId);
+        return repository.findProjectColumnsByProjectId(projectId);
     }
 
     @Override
@@ -30,7 +29,21 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
     }
 
     @Override
+    public ProjectColumn update(Integer id, String columnName, String formula) {
+        ProjectColumn projectColumn = repository.findById(id).orElse(null);
+        projectColumn.setColumnName(columnName);
+        projectColumn.setColumnName(formula);
+        return repository.save(projectColumn);
+    }
+
+    @Override
     public ProjectColumn save(ProjectColumn projectColumn) {
         return repository.save(projectColumn);
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
+    }
+
 }

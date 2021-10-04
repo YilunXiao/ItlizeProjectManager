@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface ProjectColumnRepository extends JpaRepository<ProjectColumn, Integer>{
-    ProjectColumn findProjectColumnById(Integer id);
-    ProjectColumn findProjectColumnByProjectId(Integer id);
-    ProjectColumn findProjectColumnByProject(Project project);
+    List<ProjectColumn> findProjectColumnsByProjectId(Integer id);
 }
