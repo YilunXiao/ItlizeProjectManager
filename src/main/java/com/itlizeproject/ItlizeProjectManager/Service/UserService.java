@@ -7,6 +7,8 @@ import java.util.List;
 public interface UserService {
     public User findById(Integer Id);
 
+    public User findByUsername(String username);
+
     List<User> findAll();
 
     public User updateUserById(Integer id, String name, String password, String email);

@@ -32,7 +32,7 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
     public ProjectColumn update(Integer id, String columnName, String formula) {
         ProjectColumn projectColumn = repository.findById(id).orElse(null);
         projectColumn.setColumnName(columnName);
-        projectColumn.setColumnName(formula);
+        projectColumn.setFormulaText(formula);
         return repository.save(projectColumn);
     }
 
