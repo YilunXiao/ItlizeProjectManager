@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ResourceServiceImp implements ResourceService {
@@ -99,7 +100,7 @@ public class ResourceServiceImp implements ResourceService {
         if (resourceDetail == null){
             throw new Exception("The resource detail doesn't exist.");
         }
-        List<ResourceDetail> list = resource.getResourceDetails();
+        Set<ResourceDetail> list = resource.getResourceDetails();
         if(list.contains(resourceDetail)){
             throw new Exception("The detail has been added to the list.");
         }else{
@@ -120,7 +121,7 @@ public class ResourceServiceImp implements ResourceService {
         if (resourceDetail == null){
             throw new Exception("The resource detail doesn't exist.");
         }
-        List<ResourceDetail> list = resource.getResourceDetails();
+        Set<ResourceDetail> list = resource.getResourceDetails();
         if(list.contains(resourceDetail)){
             list.remove(resourceDetail);
             resource.setResourceDetails(list);

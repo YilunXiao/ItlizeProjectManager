@@ -2,6 +2,7 @@ package com.itlizeproject.ItlizeProjectManager.Entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "resource")
@@ -17,17 +18,17 @@ public class Resource {
     @Column(name = "resource_code")
     private String resourceCode;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "resource",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<ProjectResource> projectResources;
+    //@OneToMany(
+    //        fetch = FetchType.LAZY,
+    //        mappedBy = "resource",
+    //        cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    //private List<ProjectResource> projectResources;
 
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "resource",
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<ResourceDetail> resourceDetails;
+    private Set<ResourceDetail> resourceDetails;
 
     public Resource() {
     }
@@ -60,19 +61,19 @@ public class Resource {
         this.resourceCode = resourceCode;
     }
 
-    public List<ProjectResource> getProjectResources() {
-        return projectResources;
-    }
+    //public List<ProjectResource> getProjectResources() {
+    //    return projectResources;
+    //}
 
-    public void setProjectResources(List<ProjectResource> projectResources) {
-        this.projectResources = projectResources;
-    }
+    //public void setProjectResources(List<ProjectResource> projectResources) {
+    //    this.projectResources = projectResources;
+    //}
 
-    public List<ResourceDetail> getResourceDetails() {
+    public Set<ResourceDetail> getResourceDetails() {
         return resourceDetails;
     }
 
-    public void setResourceDetails(List<ResourceDetail> resourceDetails) {
+    public void setResourceDetails(Set<ResourceDetail> resourceDetails) {
         this.resourceDetails = resourceDetails;
     }
 
