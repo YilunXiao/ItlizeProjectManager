@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
 public class ResourceDetailController {
 
     @Autowired
@@ -42,6 +43,16 @@ public class ResourceDetailController {
     @GetMapping("/resource_details/resource")
     public List<ResourceDetail> findByResourceId(@RequestParam("id") Integer id) {
         return service.findByResource(id);
+    }
+
+    // create a ResourceDetail
+    @PostMapping("/resource_details")
+    public ResourceDetail create(@RequestParam("description") String description,
+                                 @RequestParam("cost") Integer cost) {
+        ResourceDetail resourceDetail = new ResourceDetail();
+        resourceDetail.setDescription(description);
+        resourceDetail.setCost(cost);
+        return service.save(resourceDetail);
     }
 
     // update a ResourceDetail

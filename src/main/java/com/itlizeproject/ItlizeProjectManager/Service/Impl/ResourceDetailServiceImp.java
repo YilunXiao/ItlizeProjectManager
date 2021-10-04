@@ -42,6 +42,7 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
         return repository.save(resourceDetail);
     }
 
+
     @Override
     public ResourceDetail save(ResourceDetail resourceDetail) {
         return repository.save(resourceDetail);
