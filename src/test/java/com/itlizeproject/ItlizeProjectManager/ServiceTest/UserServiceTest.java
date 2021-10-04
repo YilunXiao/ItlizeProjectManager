@@ -36,7 +36,8 @@ public class UserServiceTest {
         String password = "new pw";
         String email = "newEmail@gog.com";
 
-        User actual = userService.updateUserById(updateId, name, password, email);
+        userService.updateUserById(updateId, name, password, email);
+        User actual = userService.findById(updateId);
 
         Assert.assertEquals(actual.getUsername(), name);
         Assert.assertEquals(actual.getPassword(), password);
