@@ -8,5 +8,7 @@ public interface ProjectColumnService {
     public ProjectColumn findById(Integer Id);
     List<ProjectColumn> findByProjectId(Integer projectId);
     List<ProjectColumn> findAll();
+    public ProjectColumn update(Integer id, String columnName, String formulaText);
     public ProjectColumn save(ProjectColumn projectColumn);
+    public void deleteById(Integer id);
 }

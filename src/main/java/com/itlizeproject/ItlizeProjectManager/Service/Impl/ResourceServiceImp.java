@@ -96,7 +96,7 @@ public class ResourceServiceImp implements ResourceService {
         if (resource == null){
             throw new Exception("The resource doesn't exist.");
         }
-        ResourceDetail resourceDetail = resourceDetailRepository.findResourceDetailById(resourceDetailId);
+        ResourceDetail resourceDetail = resourceDetailRepository.findById(resourceDetailId).orElse(null);
         if (resourceDetail == null){
             throw new Exception("The resource detail doesn't exist.");
         }
@@ -114,7 +114,7 @@ public class ResourceServiceImp implements ResourceService {
     @Override
     public Boolean removeDetail(Integer resourceId, Integer resourceDetailId) throws Exception{
         Resource resource = resourceRepository.findResourceById(resourceId);
-        ResourceDetail resourceDetail = resourceDetailRepository.findResourceDetailById(resourceDetailId);
+        ResourceDetail resourceDetail = resourceDetailRepository.findById(resourceDetailId).orElse(null);
         if (resource == null){
             throw new Exception("The resource doesn't exist.");
         }
