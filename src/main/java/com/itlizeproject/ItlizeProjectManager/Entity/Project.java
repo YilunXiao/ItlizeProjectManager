@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "project")
@@ -30,17 +31,18 @@ public class Project {
     @DateTimeFormat(pattern = "MM/DD/YYYY")
     private Date timeModified;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "project",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<ProjectResource> resources;
+
+    //@OneToMany(
+            //fetch = FetchType.LAZY,
+            //mappedBy = "project",
+            //cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    //private Set<ProjectResource> resources;
 
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "project",
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<ProjectColumn> columns;
+    private Set<ProjectColumn> columns;
 
     public Project() {
     }
@@ -89,19 +91,19 @@ public class Project {
         this.timeModified = timeModified;
     }
 
-    public List<ProjectResource> getResources() {
-        return resources;
-    }
-
-    public List<ProjectColumn> getColumns() {
+    public Set<ProjectColumn> getColumns() {
         return columns;
     }
 
-    public void setResources(List<ProjectResource> resources) {
-        this.resources = resources;
-    }
+    //public Set<ProjectResource> getResources() {
+    //    return resources;
+    //}
 
-    public void setColumns(List<ProjectColumn> columns) {
+    //public void setResources(Set<ProjectResource> resources) {
+    //    this.resources = resources;
+    //}
+
+    public void setColumns(Set<ProjectColumn> columns) {
         this.columns = columns;
     }
 }

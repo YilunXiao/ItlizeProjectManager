@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProjectResourceServiceImp implements ProjectResourceService {
@@ -35,15 +36,15 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
         }
 
         ProjectResource pr = new ProjectResource(project,resource);
-        List<ProjectResource> pList = project.getResources();
-        pList.add(pr);
+        //Set<ProjectResource> pList = project.getResources();
+        //pList.add(pr);
         //project.setResources(pList);
         //List<ProjectResource> rList = resource.getProjectResources();
         //rList.add(pr);
         //resource.setProjectResources(rList);
-        //resourceRepository.save(resource);
-        projectRepository.save(project);
-        //projectResourceRepository.save(pr);
+        resourceRepository.saveAndFlush(resource);
+        projectRepository.saveAndFlush(project);
+        projectResourceRepository.saveAndFlush(pr);
         return true;
     }
     public Integer findId(Integer projectId, Integer resourceId) throws Exception{
