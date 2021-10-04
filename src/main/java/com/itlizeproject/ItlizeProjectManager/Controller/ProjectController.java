@@ -28,27 +28,27 @@ public class ProjectController {
     }
 
     //Get project by Id
-    @GetMapping("/projects/")
+    @GetMapping("/projects/project")
     public ResponseEntity<Project> projectById(@RequestParam Integer id) throws Exception {
         return new ResponseEntity<> (projectService.findOne(id), HttpStatus.OK);
     }
 
     //Update project name by id
-    @PutMapping("/updateProject/")
+    @PutMapping("/projects")
     public ResponseEntity<Project> updateProject(@RequestParam Integer id, @RequestParam String name) throws Exception {
         projectService.updateName(id, name);
         return new ResponseEntity<> (projectService.findOne(id), HttpStatus.OK);
     }
 
     //Create a new project
-    @PostMapping("/addProject")
+    @PostMapping("/projects")
     public ResponseEntity<Project> addProject(@RequestParam String name) throws Exception {
         projectService.addOne(name);
         return new ResponseEntity<> (projectService.findName(name), HttpStatus.OK);
     }
 
     //add a resource to a project
-    @PostMapping("/assignResource")
+    @PostMapping("/addResource")
     public ResponseEntity<ProjectResource> assignResource(@RequestParam Integer projectId, @RequestParam Integer resourceId) throws Exception {
         projectResourceService.addOne(projectId, resourceId);
         Integer id = projectResourceService.findId(projectId, resourceId);
@@ -56,12 +56,18 @@ public class ProjectController {
     }
 
     //delete a project
-    @DeleteMapping("/projects/")
+    @DeleteMapping("/projects")
     public ResponseEntity<Project> deleteProject(@RequestParam Integer id) throws Exception {
         Project p = projectService.findOne(id);
         projectService.deleteOne(id);
         return new ResponseEntity<> (p, HttpStatus.OK);
     }
 
-
+    //remove a resource to a project
+    @DeleteMapping("/removeResource")
+    public void removeResource(@RequestParam Integer projectId, @RequestParam Integer resourceId) throws Exception {
+        Integer id = projectResourceService.findId(projectId, resourceId);
+        projectResourceService.deleteOne(id);
+        //return new ResponseEntity<> (projectResourceService.findOne(id), HttpStatus.OK);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -91,44 +92,28 @@ public class ResourceServiceImp implements ResourceService {
     }
 
     @Override
-    public Boolean addDetail(Integer resourceId, Integer resourceDetailId) throws Exception{
-        Resource resource = resourceRepository.findResourceById(resourceId);
-        if (resource == null){
-            throw new Exception("The resource doesn't exist.");
-        }
-        ResourceDetail resourceDetail = resourceDetailRepository.findById(resourceDetailId).orElse(null);
-        if (resourceDetail == null){
-            throw new Exception("The resource detail doesn't exist.");
-        }
-        Set<ResourceDetail> list = resource.getResourceDetails();
-        if(list.contains(resourceDetail)){
-            throw new Exception("The detail has been added to the list.");
-        }else{
-            list.add(resourceDetail);
-            resource.setResourceDetails(list);
-            resourceRepository.save(resource);
-        }
-        return true;
+    public void addDetail(Resource resource){
+        resourceRepository.save(resource);
     }
 
-    @Override
-    public Boolean removeDetail(Integer resourceId, Integer resourceDetailId) throws Exception{
-        Resource resource = resourceRepository.findResourceById(resourceId);
-        ResourceDetail resourceDetail = resourceDetailRepository.findById(resourceDetailId).orElse(null);
-        if (resource == null){
-            throw new Exception("The resource doesn't exist.");
-        }
-        if (resourceDetail == null){
-            throw new Exception("The resource detail doesn't exist.");
-        }
-        Set<ResourceDetail> list = resource.getResourceDetails();
-        if(list.contains(resourceDetail)){
-            list.remove(resourceDetail);
-            resource.setResourceDetails(list);
-            resourceRepository.save(resource);
-        }else{
-            throw new Exception("The detail has been added to the list.");
-        }
-        return true;
-    }
+    //@Override
+    //public Boolean removeDetail(Integer resourceId, Integer resourceDetailId) throws Exception{
+        //Resource resource = resourceRepository.findResourceById(resourceId);
+        //ResourceDetail resourceDetail = resourceDetailRepository.findById(resourceDetailId).orElse(null);
+        //if (resource == null){
+        //    throw new Exception("The resource doesn't exist.");
+        //}
+        //if (resourceDetail == null){
+        //    throw new Exception("The resource detail doesn't exist.");
+        //}
+        //Set<ResourceDetail> list = resource.getResourceDetails();
+        //if(list.contains(resourceDetail)){
+        //    list.remove(resourceDetail);
+        //resource.setResourceDetails(list);
+         //   resourceRepository.save(resource);
+        //}else{
+        //    throw new Exception("The detail has been added to the list.");
+        //}
+        //return true;
+    //}
 }

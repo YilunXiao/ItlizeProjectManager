@@ -24,11 +24,11 @@ public class Resource {
     //        cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     //private List<ProjectResource> projectResources;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "resource",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private Set<ResourceDetail> resourceDetails;
+    //@OneToMany(
+    //        fetch = FetchType.LAZY,
+    //        mappedBy = "resource",
+    //        cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    //private Set<ResourceDetail> resourceDetails;
 
     public Resource() {
     }
@@ -69,12 +69,12 @@ public class Resource {
     //    this.projectResources = projectResources;
     //}
 
-    public Set<ResourceDetail> getResourceDetails() {
-        return resourceDetails;
-    }
+    //public Set<ResourceDetail> getResourceDetails() {
+    //    return resourceDetails;
+    //}
 
-    public void setResourceDetails(Set<ResourceDetail> resourceDetails) {
-        this.resourceDetails = resourceDetails;
-    }
+    //public void setResourceDetails(Set<ResourceDetail> resourceDetails) {
+    //    this.resourceDetails = resourceDetails;
+    //}
 
 }
