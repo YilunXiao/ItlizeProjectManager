@@ -38,16 +38,24 @@ public class ResourceController {
             resourceService.updateName(id, name);
         }
         if(code != null){
-            resourceService.updateCode(id, name);
+            resourceService.updateCode(id, code);
         }
         return new ResponseEntity<> (resourceService.findOne(id), HttpStatus.OK);
     }
 
-    //Create a new project
+    //Create a new resource
     @PostMapping("/addResource")
     public ResponseEntity<Resource> addResource(@RequestParam String name) throws Exception {
         resourceService.addOne(name);
         return new ResponseEntity<> (resourceService.findName(name), HttpStatus.OK);
+    }
+
+    //delete a resource
+    @DeleteMapping("/resources/")
+    public ResponseEntity<Resource> deleteResource(@RequestParam Integer id) throws Exception {
+        Resource r = resourceService.findOne(id);
+        resourceService.deleteOne(id);
+        return new ResponseEntity<> (r, HttpStatus.OK);
     }
 
     //add a resource detail to a resource

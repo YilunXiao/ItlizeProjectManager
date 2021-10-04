@@ -49,10 +49,19 @@ public class ProjectController {
 
     //add a resource to a project
     @PostMapping("/assignResource")
-        public ResponseEntity<ProjectResource> assignResource(@RequestParam Integer projectId, @RequestParam Integer resourceId) throws Exception {
-            projectResourceService.addOne(projectId, resourceId);
-            Integer id = projectResourceService.findId(projectId, resourceId);
-            return new ResponseEntity<> (projectResourceService.findOne(id), HttpStatus.OK);
-        }
+    public ResponseEntity<ProjectResource> assignResource(@RequestParam Integer projectId, @RequestParam Integer resourceId) throws Exception {
+        projectResourceService.addOne(projectId, resourceId);
+        Integer id = projectResourceService.findId(projectId, resourceId);
+        return new ResponseEntity<> (projectResourceService.findOne(id), HttpStatus.OK);
+    }
+
+    //delete a project
+    @DeleteMapping("/projects/")
+    public ResponseEntity<Project> deleteProject(@RequestParam Integer id) throws Exception {
+        Project p = projectService.findOne(id);
+        projectService.deleteOne(id);
+        return new ResponseEntity<> (p, HttpStatus.OK);
+    }
+
 
 }
