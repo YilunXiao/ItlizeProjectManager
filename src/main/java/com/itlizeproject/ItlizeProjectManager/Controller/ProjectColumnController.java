@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
 public class ProjectColumnController {
 
     @Autowired
@@ -38,6 +39,17 @@ public class ProjectColumnController {
     @GetMapping("/project_columns/project")
     public List<ProjectColumn> findByProjectId(@RequestParam("id") Integer id) {
         return service.findByProjectId(id);
+    }
+
+    // create a ProjectColumn
+    @PostMapping("/project_columns")
+    public ProjectColumn create(@RequestParam("name") String name,
+                                @RequestParam("type") ProjectColumn.Type type) {
+        ProjectColumn projectColumn = new ProjectColumn();
+        projectColumn.setColumnName(name);
+        projectColumn.setType(type);
+
+        return service.save(projectColumn);
     }
 
     // update a ProjectColumn
