@@ -15,7 +15,7 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
 
     @Override
     public ProjectColumn findById(Integer Id) {
-        return repository.getById(Id);
+        return repository.findById(Id).orElse(null);
     }
 
     @Override

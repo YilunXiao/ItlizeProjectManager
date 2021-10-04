@@ -15,7 +15,7 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
 
     @Override
     public ResourceDetail findById(Integer Id) {
-        return repository.getById(Id);
+        return repository.findById(Id).orElse(null);
     }
 
     @Override
