@@ -99,4 +99,11 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
         return true;
     }
 
+    @Override
+    public List<ProjectResource> findByProject (Project project) throws Exception {
+        if(project == null)
+            throw new Exception("The project doesn't exist.");
+        return projectResourceRepository.findProjectResourcesByProject(project);
+    }
+
 }

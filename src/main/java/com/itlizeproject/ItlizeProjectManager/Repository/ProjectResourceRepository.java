@@ -6,10 +6,12 @@ import com.itlizeproject.ItlizeProjectManager.Entity.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProjectResourceRepository extends JpaRepository<ProjectResource, Integer> {
     ProjectResource findProjectResourceById(Integer id);
     ProjectResource findProjectResourceByProjectAndResource(Project project, Resource resource);
-    ProjectResource findProjectResourceByProjectId(Integer id);
-    ProjectResource findProjectResourceByResourceId(Integer id);
+    List<ProjectResource> findProjectResourcesByProject(Project project);
+    List<ProjectResource> findProjectResourcesByResource(Resource resource);
 }

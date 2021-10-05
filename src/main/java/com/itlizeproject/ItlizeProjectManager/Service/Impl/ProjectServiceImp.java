@@ -2,6 +2,7 @@ package com.itlizeproject.ItlizeProjectManager.Service.Impl;
 
 
 import com.itlizeproject.ItlizeProjectManager.Entity.Project;
+import com.itlizeproject.ItlizeProjectManager.Entity.User;
 import com.itlizeproject.ItlizeProjectManager.Repository.ProjectRepository;
 import com.itlizeproject.ItlizeProjectManager.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,4 +74,11 @@ public class ProjectServiceImp implements ProjectService {
 
     @Override
     public void save(Project project){projectRepository.save(project);}
+
+    @Override
+    public List<Project> findByUser(User user) throws Exception {
+        if (user == null)
+            throw new Exception ("The user doesn't exist.");
+        return projectRepository.findProjectsByUser(user);
+    }
 }
