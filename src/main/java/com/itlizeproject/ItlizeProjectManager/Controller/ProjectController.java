@@ -1,6 +1,8 @@
 package com.itlizeproject.ItlizeProjectManager.Controller;
 
 import com.itlizeproject.ItlizeProjectManager.Entity.Project;
+import com.itlizeproject.ItlizeProjectManager.Entity.ProjectResource;
+import com.itlizeproject.ItlizeProjectManager.Entity.Resource;
 import com.itlizeproject.ItlizeProjectManager.Entity.User;
 import com.itlizeproject.ItlizeProjectManager.Service.ProjectResourceService;
 import com.itlizeproject.ItlizeProjectManager.Service.ProjectService;
@@ -9,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -114,6 +117,7 @@ public class ProjectController {
         }
     }
 
+    //To remove a project from a user
     @PostMapping("/removeProject")
     public ResponseEntity<?> removeProject(@RequestParam Integer id) {
         try {
@@ -121,6 +125,37 @@ public class ProjectController {
             project.setUser(null);
             projectService.save(project);
             return new ResponseEntity<>(project, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<> (e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //To get all projects with a user
+    @GetMapping("/allProjects")
+    public ResponseEntity<?> findAllProjects(@RequestParam Integer userId) {
+        try{
+            User user = userService.findById(userId);
+            List<Project> result = projectService.findByUser(user);
+            if (result == null)
+                return new ResponseEntity<> ("The user has no project.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<> (e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //To get all resource with a same project
+    @GetMapping("/allResources")
+    public ResponseEntity<?> findAllResources(@RequestParam Integer projectId) {
+        try{
+            Project project = projectService.findOne(projectId);
+            List<ProjectResource> result = projectResourceService.findByProject(project);
+            if (result == null)
+                return new ResponseEntity<> ("The project doesn't use any resource.", HttpStatus.BAD_REQUEST);
+            List<Resource> resources = new ArrayList<>();
+            for (ProjectResource projectResource : result)
+                resources.add(projectResource.getResource());
+            return new ResponseEntity<>(resources, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<> (e.getMessage(), HttpStatus.BAD_REQUEST);
         }
