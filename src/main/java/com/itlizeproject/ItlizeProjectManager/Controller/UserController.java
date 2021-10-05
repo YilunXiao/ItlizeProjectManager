@@ -7,6 +7,8 @@ import com.itlizeproject.ItlizeProjectManager.Service.Impl.UserServiceImp;
 import com.itlizeproject.ItlizeProjectManager.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 //import sun.misc.Request;
 
@@ -22,36 +24,36 @@ public class UserController {
 
     // get all users from database
     @GetMapping("/users")
-    public List<User> list() {
-        return service.findAll();
+    public ResponseEntity<List<User>> list() {
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     // get one user by id
     @GetMapping("/users/user")
-    public User findById(@RequestParam("id") Integer id) {
-        return service.findById(id);
+    public ResponseEntity<User> findById(@RequestParam("id") Integer id) {
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     // create a user
     @PostMapping("/users")
-    public User create(@RequestParam("name") String name,
+    public ResponseEntity<User> create(@RequestParam("name") String name,
                        @RequestParam("email") String email,
                        @RequestParam("password") String password) {
         User user = new User();
         user.setUsername(name);
         user.setEmail(email);
         user.setPassword(password);
-        return service.save(user);
+        return new ResponseEntity<>(service.save(user), HttpStatus.OK);
     }
 
 
     // update a user
     @PutMapping("/users")
-    public User update(@RequestParam("id") Integer id,
+    public ResponseEntity<User> update(@RequestParam("id") Integer id,
                        @RequestParam("name") String name,
                        @RequestParam("email") String email,
                        @RequestParam("password") String password) {
-        return service.updateUserById(id, name, password, email);
+        return new ResponseEntity<>(service.updateUserById(id, name, password, email), HttpStatus.OK);
     }
 
     // delete a user
