@@ -32,12 +32,14 @@ public class ProjectController {
 
     //Get project by Id
     @GetMapping("/projects/project")
+
     public ResponseEntity<?> projectById(@RequestParam Integer id) {
         try{
             return new ResponseEntity<> (projectService.findOne(id), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<> (e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+
     }
 
     //Update project name by id

@@ -49,6 +49,14 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
     }
 
     @Override
+    public ResourceDetail create(String description, Integer cost) {
+        ResourceDetail resourceDetail = new ResourceDetail();
+        resourceDetail.setDescription(description);
+        resourceDetail.setCost(cost);
+        return repository.save(resourceDetail);
+    }
+
+    @Override
     public void delete(ResourceDetail resourceDetail) {
         repository.delete(resourceDetail);
     }

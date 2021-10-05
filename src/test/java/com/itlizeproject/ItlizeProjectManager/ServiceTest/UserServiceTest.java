@@ -30,8 +30,24 @@ public class UserServiceTest {
     }
 
     @Test
+    public void createTest() {
+        String username = "Test User";
+        String password = "password";
+        String email = "email@goog.com";
+        User user = userService.create(username, password, email);
+        Assert.assertNotNull(user);
+    }
+
+    @Test
+    public void findTest() {
+        Integer userId = 1;
+        User user = userService.findById(userId);
+        Assert.assertEquals(user.getId(), userId);
+    }
+
+    @Test
     public void updateTest() {
-        int updateId = 2;
+        int updateId = 1;
         String name = "updated 2";
         String password = "new pw";
         String email = "newEmail@gog.com";
@@ -39,10 +55,9 @@ public class UserServiceTest {
         userService.updateUserById(updateId, name, password, email);
         User actual = userService.findById(updateId);
 
-        Assert.assertEquals(actual.getUsername(), name);
+        Assert.assertEquals(actual.getUserName(), name);
         Assert.assertEquals(actual.getPassword(), password);
         Assert.assertEquals(actual.getEmail(), email);
     }
-
 }
 

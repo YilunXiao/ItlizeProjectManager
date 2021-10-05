@@ -21,7 +21,7 @@ public class UserRepositoryTest {
     public void saveTest() {
         User user = new User();
         user.setId(123);
-        user.setUsername("Test User");
+        user.setUserName("Test User");
         user.setPassword("abcde");
         user.setEmail("Email@gog.com");
 

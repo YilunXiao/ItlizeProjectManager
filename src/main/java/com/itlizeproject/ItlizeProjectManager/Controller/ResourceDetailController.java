@@ -2,12 +2,11 @@ package com.itlizeproject.ItlizeProjectManager.Controller;
 
 //import com.itlizeproject.ItlizeProjectManager.Config.LimitConfig;
 import com.itlizeproject.ItlizeProjectManager.Entity.ResourceDetail;
-import com.itlizeproject.ItlizeProjectManager.Entity.User;
 import com.itlizeproject.ItlizeProjectManager.Service.ResourceDetailService;
-import com.itlizeproject.ItlizeProjectManager.Service.Impl.UserServiceImp;
-import com.itlizeproject.ItlizeProjectManager.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 //import sun.misc.Request;
 
@@ -23,44 +22,41 @@ public class ResourceDetailController {
 
     // get all ResourceDetails
     @GetMapping("/resource_details")
-    public List<ResourceDetail> list() {
-        return service.findAll();
+    public ResponseEntity<List<ResourceDetail>> list() {
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     // get a ResourceDetail by id
     @GetMapping("/resource_details/resource_detail")
-    public ResourceDetail findById(@RequestParam("id") Integer id) {
-        return service.findById(id);
+    public ResponseEntity<ResourceDetail> findById(@RequestParam("id") Integer id) {
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     // get all ResourceDetails with projectColumnsId
     @GetMapping("/resource_details/project_column")
-    public List<ResourceDetail> findByColumnId(@RequestParam("id") Integer id) {
-        return service.findByProjectColumn(id);
+    public ResponseEntity<List<ResourceDetail>> findByColumnId(@RequestParam("id") Integer id) {
+        return new ResponseEntity<>(service.findByProjectColumn(id), HttpStatus.OK);
     }
 
     // get all ResourceDetails with resourceId
     @GetMapping("/resource_details/resource")
-    public List<ResourceDetail> findByResourceId(@RequestParam("id") Integer id) {
-        return service.findByResource(id);
+    public ResponseEntity<List<ResourceDetail>> findByResourceId(@RequestParam("id") Integer id) {
+        return new ResponseEntity<>(service.findByResource(id), HttpStatus.OK);
     }
 
     // create a ResourceDetail
     @PostMapping("/resource_details")
-    public ResourceDetail create(@RequestParam("description") String description,
+    public ResponseEntity<ResourceDetail> create(@RequestParam("description") String description,
                                  @RequestParam("cost") Integer cost) {
-        ResourceDetail resourceDetail = new ResourceDetail();
-        resourceDetail.setDescription(description);
-        resourceDetail.setCost(cost);
-        return service.save(resourceDetail);
+        return new ResponseEntity<>(service.create(description, cost), HttpStatus.OK);
     }
 
     // update a ResourceDetail
     @PutMapping("/resource_details")
-    public ResourceDetail update(@RequestParam("id") Integer id,
+    public ResponseEntity<ResourceDetail> update(@RequestParam("id") Integer id,
                                  @RequestParam("description") String description,
                                  @RequestParam("cost") Integer cost) {
-        return service.update(id, description, cost);
+        return new ResponseEntity<>(service.update(id, description, cost), HttpStatus.OK);
     }
 
     // delete a ResourceDetail
