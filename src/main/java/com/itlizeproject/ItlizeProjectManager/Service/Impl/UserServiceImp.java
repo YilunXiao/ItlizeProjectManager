@@ -22,7 +22,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return repository.findUserByUsername(username);
+        return repository.findByUserName(username);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UserServiceImp implements UserService {
     @Override
     public User updateUserById(Integer id, String name, String password, String email) {
         User user = findById(id);
-        user.setUsername(name);
+        user.setUserName(name);
         user.setPassword(password);
         user.setEmail(email);
         user.setTimeCreated(new Date());
@@ -59,7 +59,7 @@ public class UserServiceImp implements UserService {
     @Override
     public User create(String name, String password, String email) {
         User user = new User();
-        user.setUsername(name);
+        user.setUserName(name);
         user.setPassword(password);
         user.setEmail(email);
         return repository.save(user);

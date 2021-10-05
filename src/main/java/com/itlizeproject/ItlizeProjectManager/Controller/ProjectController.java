@@ -33,7 +33,12 @@ public class ProjectController {
 
     //Get project by Id
     @GetMapping("/projects/project")
-    public ResponseEntity<Project> projectById(@RequestParam Integer id) throws Exception {
+    public ResponseEntity<?> projectById(@RequestParam Integer id)  {
+        Project project = projectService.findOne(id);
+        if (project == null) {
+            return new ResponseEntity<>("{Error: project is not found", HttpStatus.BAD_REQUEST);
+
+        }
         return new ResponseEntity<> (projectService.findOne(id), HttpStatus.OK);
     }
 

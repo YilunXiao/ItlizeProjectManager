@@ -5,7 +5,7 @@ import com.itlizeproject.ItlizeProjectManager.Entity.Project;
 import java.util.List;
 
 public interface ProjectService {
-    Project findOne(Integer id) throws Exception;
+    Project findOne(Integer id)  ;
     List<Project> findAll();
     Project findName(String projectName) throws Exception;
     Boolean addOne(String projectName);
