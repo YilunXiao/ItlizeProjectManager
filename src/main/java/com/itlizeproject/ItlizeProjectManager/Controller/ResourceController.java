@@ -30,78 +30,94 @@ public class ResourceController {
 
     //Get resource by Id
     @GetMapping("/resources/resource")
-    public ResponseEntity<Resource> resourceById(@RequestParam Integer id) throws Exception {
-        return new ResponseEntity<> (resourceService.findOne(id), HttpStatus.OK);
+    public ResponseEntity<?> resourceById(@RequestParam Integer id) {
+        try {
+            return new ResponseEntity<>(resourceService.findOne(id), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     //Update resource name and code by id
     @PutMapping("/resources")
-    public ResponseEntity<Resource> updateResource(@RequestParam Integer id, @RequestParam String name, @RequestParam String code) throws Exception {
-        if(name != null) {
-            resourceService.updateName(id, name);
+    public ResponseEntity<?> updateResource(@RequestParam Integer id, @RequestParam String name, @RequestParam String code) {
+        try {
+            if (name != null) {
+                resourceService.updateName(id, name);
+            }
+            if (code != null) {
+                resourceService.updateCode(id, code);
+            }
+            return new ResponseEntity<>(resourceService.findOne(id), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        if(code != null){
-            resourceService.updateCode(id, code);
-        }
-        return new ResponseEntity<> (resourceService.findOne(id), HttpStatus.OK);
     }
 
     //Create a new resource
     @PostMapping("/resources")
-    public ResponseEntity<Resource> addResource(@RequestParam String name) throws Exception {
-        resourceService.addOne(name);
-        return new ResponseEntity<> (resourceService.findName(name), HttpStatus.OK);
+    public ResponseEntity<?> addResource(@RequestParam String name) {
+        try {
+            resourceService.addOne(name);
+            return new ResponseEntity<>(resourceService.findName(name), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     //delete a resource
     @DeleteMapping("/resources")
-    public ResponseEntity<Resource> deleteResource(@RequestParam Integer id) throws Exception {
-        Resource r = resourceService.findOne(id);
-        resourceService.deleteOne(id);
-        return new ResponseEntity<> (r, HttpStatus.OK);
+    public ResponseEntity<?> deleteResource(@RequestParam Integer id) {
+        try {
+            Resource r = resourceService.findOne(id);
+            resourceService.deleteOne(id);
+            return new ResponseEntity<>(r, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     //add a resource detail to a resource
     @PostMapping("/addDetail")
-    public ResponseEntity<ResourceDetail> addDetail(@RequestParam Integer resourceId, @RequestParam Integer detailId) throws Exception {
-        Resource resource = resourceService.findOne(resourceId);
-        if (resource == null){
-            throw new Exception("The resource doesn't exist.");
-        }
-        ResourceDetail resourceDetail = resourceDetailService.findById(detailId);
-        if (resourceDetail == null){
-            throw new Exception("The resource detail doesn't exist.");
-        }
-        //Set<ResourceDetail> list = resource.getResourceDetails();
-        //if(list.contains(resourceDetail)){
-        //    throw new Exception("The detail has been added to the list.");
-        //}else{
-        //    list.add(resourceDetail);
-        //    resource.setResourceDetails(list);
+    public ResponseEntity<?> addDetail(@RequestParam Integer resourceId, @RequestParam Integer detailId) {
+        try {
+            Resource resource = resourceService.findOne(resourceId);
+            ResourceDetail resourceDetail = resourceDetailService.findById(detailId);
+
+            //Set<ResourceDetail> list = resource.getResourceDetails();
+            //if(list.contains(resourceDetail)){
+            //    throw new Exception("The detail has been added to the list.");
+            //}else{
+            //    list.add(resourceDetail);
+            //    resource.setResourceDetails(list);
             resourceDetail.setResource(resource);
-        //   resourceService.addDetail(resource);
-        //}
-        resourceDetailService.save(resourceDetail);
-        return new ResponseEntity<> (resourceDetail, HttpStatus.OK);
+            //   resourceService.addDetail(resource);
+            //}
+            resourceDetailService.save(resourceDetail);
+            return new ResponseEntity<>(resourceDetail, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     //add a resource detail to a resource
     @PostMapping("/removeDetail")
-    public ResponseEntity<ResourceDetail> removeDetail(@RequestParam Integer id) throws Exception {
-        ResourceDetail resourceDetail = resourceDetailService.findById(id);
-        if (resourceDetail == null){
-            throw new Exception("The resource detail doesn't exist.");
+    public ResponseEntity<?> removeDetail(@RequestParam Integer id) {
+        try {
+            ResourceDetail resourceDetail = resourceDetailService.findById(id);
+            //Set<ResourceDetail> list = resource.getResourceDetails();
+            //if(!list.contains(resourceDetail)){
+            //    throw new Exception("The detail isn't in the list.");
+            //}else{
+            //    list.remove(resourceDetail);
+            //    resource.setResourceDetails(list);
+            resourceDetail.setResource(null);
+            resourceDetailService.save(resourceDetail);
+            //    resourceService.addDetail(resource);
+            //}
+            return new ResponseEntity<>(resourceDetail, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        //Set<ResourceDetail> list = resource.getResourceDetails();
-        //if(!list.contains(resourceDetail)){
-        //    throw new Exception("The detail isn't in the list.");
-        //}else{
-        //    list.remove(resourceDetail);
-        //    resource.setResourceDetails(list);
-        resourceDetail.setResource(null);
-        resourceDetailService.save(resourceDetail);
-        //    resourceService.addDetail(resource);
-        //}
-        return new ResponseEntity<> (resourceDetail, HttpStatus.OK);
     }
 }

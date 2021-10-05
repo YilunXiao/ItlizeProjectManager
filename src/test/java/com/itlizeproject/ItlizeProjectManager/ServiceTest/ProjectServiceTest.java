@@ -17,7 +17,7 @@ public class ProjectServiceTest {
     private ProjectService projectService;
 
     @Test
-    void testCase0(){
+    void testCase0() throws Exception {
         Boolean result = projectService.addOne("p0");
         assert(result).equals(true);
     }

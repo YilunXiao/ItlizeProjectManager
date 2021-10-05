@@ -16,7 +16,7 @@ public class Project {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -38,11 +38,11 @@ public class Project {
             //cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     //private Set<ProjectResource> resources;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "project",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private Set<ProjectColumn> columns;
+    //@OneToMany(
+    //        fetch = FetchType.LAZY,
+    //        mappedBy = "project",
+    //        cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    //private Set<ProjectColumn> columns;
 
     public Project() {
     }
@@ -91,9 +91,9 @@ public class Project {
         this.timeModified = timeModified;
     }
 
-    public Set<ProjectColumn> getColumns() {
-        return columns;
-    }
+    //public Set<ProjectColumn> getColumns() {
+    //    return columns;
+    //}
 
     //public Set<ProjectResource> getResources() {
     //    return resources;
@@ -103,8 +103,8 @@ public class Project {
     //    this.resources = resources;
     //}
 
-    public void setColumns(Set<ProjectColumn> columns) {
-        this.columns = columns;
-    }
+    //public void setColumns(Set<ProjectColumn> columns) {
+    //    this.columns = columns;
+    //}
 }
 

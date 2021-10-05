@@ -39,7 +39,9 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public Boolean addOne(String projectName) {
+    public Boolean addOne(String projectName) throws Exception {
+        if (projectRepository.findProjectByName(projectName) != null)
+            throw new Exception("The project name already exists.");
         Project newProject = new Project(projectName);
         newProject.setTimeCreated(new Date());
         newProject.setTimeModified(new Date());
@@ -62,9 +64,8 @@ public class ProjectServiceImp implements ProjectService {
     @Override
     public Boolean deleteOne(Integer id) throws Exception {
         Project project = projectRepository.findProjectById(id);
-        if (project == null) {
-            throw new Exception("Failed. The project doesn't exist.");
-        }
+        if (project == null)
+            throw new Exception("The project doesn't exist.");
         projectRepository.deleteById(id);
         return true;
     }
