@@ -17,4 +17,6 @@ public interface UserService {
     public void deleteById(Integer id);
 
     public User save(User user);
+
+    public User create(String name, String password, String email);
 }

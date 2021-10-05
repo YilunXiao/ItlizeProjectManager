@@ -42,12 +42,9 @@ public class ProjectColumnController {
     // create a ProjectColumn
     @PostMapping("/project_columns")
     public ResponseEntity<ProjectColumn> create(@RequestParam("name") String name,
+                                @RequestParam("formula") String formula,
                                 @RequestParam("type") ProjectColumn.Type type) {
-        ProjectColumn projectColumn = new ProjectColumn();
-        projectColumn.setColumnName(name);
-        projectColumn.setType(type);
-
-        return new ResponseEntity<>(service.save(projectColumn), HttpStatus.OK);
+        return new ResponseEntity<>(service.create(name, formula, type), HttpStatus.OK);
     }
 
     // update a ProjectColumn

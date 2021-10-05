@@ -39,11 +39,7 @@ public class UserController {
     public ResponseEntity<User> create(@RequestParam("name") String name,
                        @RequestParam("email") String email,
                        @RequestParam("password") String password) {
-        User user = new User();
-        user.setUsername(name);
-        user.setEmail(email);
-        user.setPassword(password);
-        return new ResponseEntity<>(service.save(user), HttpStatus.OK);
+        return new ResponseEntity<>(service.create(name, password, email), HttpStatus.OK);
     }
 
 

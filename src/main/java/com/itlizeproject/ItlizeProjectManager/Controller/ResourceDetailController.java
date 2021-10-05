@@ -48,10 +48,7 @@ public class ResourceDetailController {
     @PostMapping("/resource_details")
     public ResponseEntity<ResourceDetail> create(@RequestParam("description") String description,
                                  @RequestParam("cost") Integer cost) {
-        ResourceDetail resourceDetail = new ResourceDetail();
-        resourceDetail.setDescription(description);
-        resourceDetail.setCost(cost);
-        return new ResponseEntity<>(service.save(resourceDetail), HttpStatus.OK);
+        return new ResponseEntity<>(service.create(description, cost), HttpStatus.OK);
     }
 
     // update a ResourceDetail

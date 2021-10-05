@@ -42,6 +42,15 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
     }
 
     @Override
+    public ProjectColumn create(String columnName, String formulaText, ProjectColumn.Type type) {
+        ProjectColumn projectColumn = new ProjectColumn();
+        projectColumn.setColumnName(columnName);
+        projectColumn.setFormulaText(formulaText);
+        projectColumn.setType(type);
+        return repository.save(projectColumn);
+    }
+
+    @Override
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
