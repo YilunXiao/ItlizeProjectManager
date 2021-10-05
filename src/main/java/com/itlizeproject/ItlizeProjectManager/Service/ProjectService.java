@@ -8,7 +8,7 @@ public interface ProjectService {
     Project findOne(Integer id)  ;
     List<Project> findAll();
     Project findName(String projectName) throws Exception;
-    Boolean addOne(String projectName);
+    Boolean addOne(String projectName) throws Exception;
     Boolean updateName(Integer id, String projectName) throws Exception;
     Boolean deleteOne(Integer id) throws Exception;
     void save(Project project);
