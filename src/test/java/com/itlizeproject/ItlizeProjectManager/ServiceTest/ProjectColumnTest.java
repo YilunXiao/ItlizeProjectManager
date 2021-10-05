@@ -18,6 +18,31 @@ public class ProjectColumnTest {
     @Autowired
     private ProjectColumnService service;
 
+
+    @Test
+    public void findNullTest() {
+        int projectColumnId = 0;
+        ProjectColumn projectColumn = service.findById(projectColumnId);
+        Assert.assertNull(projectColumn);
+    }
+
+    @Test
+    public void createTest() {
+        String columnName = "Unit Test";
+        String formula = "A + B = Unit Test";
+        ProjectColumn.Type type = ProjectColumn.Type.Text;
+        ProjectColumn projectColumn = service.create(columnName, formula, type);
+    }
+
+    @Test
+    public void findTest() {
+        Integer projectColumnId = 1;
+        ProjectColumn projectColumn = service.findById(projectColumnId);
+        Assert.assertEquals(projectColumn.getId(), projectColumnId);
+    }
+
+
+
     @Test
     public void updateTest() {
         Integer id = 1;

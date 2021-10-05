@@ -20,6 +20,28 @@ public class ResourceDetailServiceTest {
     private ResourceDetailService service;
 
     @Test
+    public void findNullTest() {
+        int resourceDetailId = 0;
+        ResourceDetail resourceDetail = service.findById(resourceDetailId);
+        Assert.assertNull(resourceDetail);
+    }
+
+    @Test
+    public void createTest() {
+        String description = "Unit test resource detail";
+        Integer cost = 100;
+        ResourceDetail resourceDetail = service.create(description, cost);
+        Assert.assertNotNull(resourceDetail);
+    }
+
+    @Test
+    public void findTest() {
+        Integer resourceDetailId = 1;
+        ResourceDetail resourceDetail = service.findById(resourceDetailId);
+        Assert.assertEquals(resourceDetail.getId(), resourceDetailId);
+    }
+
+    @Test
     public void updateTest() {
         Integer id = 1;
         String description = "Description updated by test";

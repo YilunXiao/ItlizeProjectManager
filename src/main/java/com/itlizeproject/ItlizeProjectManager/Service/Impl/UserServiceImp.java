@@ -55,4 +55,13 @@ public class UserServiceImp implements UserService {
     public User save(User user) {
         return repository.save(user);
     }
+
+    @Override
+    public User create(String name, String password, String email) {
+        User user = new User();
+        user.setUsername(name);
+        user.setPassword(password);
+        user.setEmail(email);
+        return repository.save(user);
+    }
 }

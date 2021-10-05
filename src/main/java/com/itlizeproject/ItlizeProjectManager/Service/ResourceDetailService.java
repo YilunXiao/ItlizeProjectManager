@@ -10,6 +10,7 @@ public interface ResourceDetailService {
     List<ResourceDetail> findByProjectColumn(Integer projectId);
     public ResourceDetail update(Integer id, String description, Integer cost);
     public ResourceDetail save(ResourceDetail resourceDetail);
+    public ResourceDetail create(String description, Integer cost);
     public void delete(ResourceDetail resourceDetail);
     public void deleteById(Integer id);
 }

@@ -10,5 +10,6 @@ public interface ProjectColumnService {
     List<ProjectColumn> findAll();
     public ProjectColumn update(Integer id, String columnName, String formulaText);
     public ProjectColumn save(ProjectColumn projectColumn);
+    public ProjectColumn create(String columnName, String formulaText, ProjectColumn.Type type);
     public void deleteById(Integer id);
 }
