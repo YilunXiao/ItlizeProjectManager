@@ -81,17 +81,14 @@ public class ResourceController {
             resourceDetail.setResource(resource);
         //   resourceService.addDetail(resource);
         //}
+        resourceDetailService.save(resourceDetail);
         return new ResponseEntity<> (resourceDetail, HttpStatus.OK);
     }
 
     //add a resource detail to a resource
-    @DeleteMapping("/removeDetail")
-    public ResponseEntity<ResourceDetail> removeDetail(@RequestParam Integer resourceId, @RequestParam Integer detailId) throws Exception {
-        Resource resource = resourceService.findOne(resourceId);
-        if (resource == null){
-            throw new Exception("The resource doesn't exist.");
-        }
-        ResourceDetail resourceDetail = resourceDetailService.findById(detailId);
+    @PostMapping("/removeDetail")
+    public ResponseEntity<ResourceDetail> removeDetail(@RequestParam Integer id) throws Exception {
+        ResourceDetail resourceDetail = resourceDetailService.findById(id);
         if (resourceDetail == null){
             throw new Exception("The resource detail doesn't exist.");
         }
@@ -101,7 +98,8 @@ public class ResourceController {
         //}else{
         //    list.remove(resourceDetail);
         //    resource.setResourceDetails(list);
-            resourceDetail.setResource(null);
+        resourceDetail.setResource(null);
+        resourceDetailService.save(resourceDetail);
         //    resourceService.addDetail(resource);
         //}
         return new ResponseEntity<> (resourceDetail, HttpStatus.OK);

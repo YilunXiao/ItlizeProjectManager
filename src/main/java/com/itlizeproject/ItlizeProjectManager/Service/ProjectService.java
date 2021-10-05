@@ -11,4 +11,5 @@ public interface ProjectService {
     Boolean addOne(String projectName);
     Boolean updateName(Integer id, String projectName) throws Exception;
     Boolean deleteOne(Integer id) throws Exception;
+    void save(Project project);
 }
