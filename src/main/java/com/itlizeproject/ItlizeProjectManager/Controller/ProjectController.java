@@ -68,11 +68,12 @@ public class ProjectController {
     }
 
     //remove a resource to a project
+
     @PostMapping("/removeResource")
-    public void removeResource(@RequestParam Integer projectId, @RequestParam Integer resourceId) throws Exception {
+    public ResponseEntity<String> removeResource(@RequestParam Integer projectId, @RequestParam Integer resourceId) throws Exception {
         Integer id = projectResourceService.findId(projectId, resourceId);
-        projectResourceService.deleteOne(id);
-        //return new ResponseEntity<> (projectResourceService.findOne(id), HttpStatus.OK);
+        String s = projectResourceService.deleteOne(id)? "Success.": "Failed.";
+        return new ResponseEntity<> (s, HttpStatus.OK);
     }
 
     //assign a project to a user
