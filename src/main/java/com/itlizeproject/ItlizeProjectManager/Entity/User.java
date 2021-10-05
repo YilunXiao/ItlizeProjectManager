@@ -22,11 +22,11 @@ public class User {
     @DateTimeFormat(pattern = "MM/DD/YYYY")
     private Date timeCreated;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "user",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Project> projects;
+    //@OneToMany(
+    //        fetch = FetchType.LAZY,
+    //        mappedBy = "user",
+    //        cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    //private List<Project> projects;
 
     public User() {
     }
@@ -71,11 +71,11 @@ public class User {
         this.timeCreated = timeCreated;
     }
 
-    public List<Project> getProjects() {
-        return projects;
-    }
+    //public List<Project> getProjects() {
+    //    return projects;
+    //}
 
-    public void setProjects(List<Project> project) {
-        this.projects = project;
-    }
+    //public void setProjects(List<Project> project) {
+    //    this.projects = project;
+    //}
 }
