@@ -16,11 +16,12 @@ public class ProjectServiceImp implements ProjectService {
     private ProjectRepository projectRepository;
 
     @Override
-    public Project findOne(Integer id) throws Exception {
+    public Project findOne(Integer id)
+    {
         Project project = projectRepository.findProjectById(id);
-        if (project == null) {
-            throw new Exception("No project found by id " + id);
-        }
+        //if (project == null) {
+        //   throw new Exception("No project found by id " + id);
+       // }
         return project;
     }
 
@@ -40,7 +41,8 @@ public class ProjectServiceImp implements ProjectService {
 
     @Override
     public Boolean addOne(String projectName) {
-        Project newProject = new Project(projectName);
+        Project newProject = new Project();
+        newProject.setName(projectName);
         newProject.setTimeCreated(new Date());
         newProject.setTimeModified(new Date());
         projectRepository.saveAndFlush(newProject);

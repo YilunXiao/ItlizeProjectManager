@@ -55,7 +55,7 @@ public class UserServiceTest {
         userService.updateUserById(updateId, name, password, email);
         User actual = userService.findById(updateId);
 
-        Assert.assertEquals(actual.getUsername(), name);
+        Assert.assertEquals(actual.getUserName(), name);
         Assert.assertEquals(actual.getPassword(), password);
         Assert.assertEquals(actual.getEmail(), email);
     }
