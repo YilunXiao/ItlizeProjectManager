@@ -34,11 +34,11 @@ public class ProjectColumn {
     @Column(name = "formula_text")
     private String formulaText;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "projectColumn",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<ResourceDetail> resourceDetails;
+//    @OneToMany(
+//            fetch = FetchType.LAZY,
+//            mappedBy = "projectColumn",
+//            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    private List<ResourceDetail> resourceDetails;
 
     public ProjectColumn() {
     }
@@ -84,11 +84,11 @@ public class ProjectColumn {
     }
 
 
-    public List<ResourceDetail> getResourceDetails() {
-        return resourceDetails;
-    }
+//    public List<ResourceDetail> getResourceDetails() {
+//        return resourceDetails;
+//    }
 
-    public void setResourceDetails(List<ResourceDetail> resourceDetails) {
-        this.resourceDetails = resourceDetails;
-    }
+//    public void setResourceDetails(List<ResourceDetail> resourceDetails) {
+//        this.resourceDetails = resourceDetails;
+//    }
 }

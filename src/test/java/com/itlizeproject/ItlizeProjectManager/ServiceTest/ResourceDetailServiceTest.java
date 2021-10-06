@@ -53,4 +53,22 @@ public class ResourceDetailServiceTest {
         Assert.assertEquals(cost, actual.getCost());
         Assert.assertEquals(description, actual.getDescription());
     }
+
+    @Test
+    public void assignTest() {
+        Integer resourceId = 1;
+        Integer resourceDetailId = 2;
+
+        service.assignResource(resourceDetailId, resourceId);
+
+        Assert.assertEquals(service.findById(resourceId).getResource().getId(), resourceId);
+    }
+
+    @Test
+    public void findByResourceTest() {
+        Integer resourceId = 1;
+
+        Assert.assertNotNull(service.findByResource(resourceId));
+
+    }
 }

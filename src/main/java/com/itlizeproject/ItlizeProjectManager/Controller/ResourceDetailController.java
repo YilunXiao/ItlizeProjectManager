@@ -59,6 +59,20 @@ public class ResourceDetailController {
         return new ResponseEntity<>(service.update(id, description, cost), HttpStatus.OK);
     }
 
+    //assign a projectColumn to a resourceDetail
+    @PutMapping("/resource_details/project_column")
+    public ResponseEntity<ResourceDetail> assignProjectColumn(@RequestParam ("resourceDetailId") Integer resourceDetailId,
+                                                              @RequestParam ("projectColumnId") Integer projectColumnId) {
+        return new ResponseEntity<>(service.assignProjectColumn(resourceDetailId,projectColumnId), HttpStatus.OK);
+    }
+
+    // assign a resource to a resourceDetail
+    @PutMapping("/resource_details/resource")
+    public ResponseEntity<ResourceDetail> assignResource(@RequestParam("resourceDetailId") Integer resourceDetailId,
+                                                         @RequestParam("resourceId") Integer resourceId) {
+        return new ResponseEntity<>(service.assignResource(resourceDetailId, resourceId), HttpStatus.OK);
+    }
+
     // delete a ResourceDetail
     @DeleteMapping("/resource_details")
     public void delete(@RequestParam("id") Integer id) {

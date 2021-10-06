@@ -7,7 +7,6 @@ import java.util.List;
 
 @Repository
 public interface ResourceDetailRepository extends JpaRepository<ResourceDetail, Integer> {
-    //ResourceDetail findResourceDetailById(Integer id);
     List<ResourceDetail> findResourceDetailByResourceId(Integer id);
     List<ResourceDetail> findResourceDetailByProjectColumnId(Integer id);
 }

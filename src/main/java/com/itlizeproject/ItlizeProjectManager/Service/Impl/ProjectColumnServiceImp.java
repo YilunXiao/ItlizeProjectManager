@@ -1,7 +1,9 @@
 package com.itlizeproject.ItlizeProjectManager.Service.Impl;
 
+import com.itlizeproject.ItlizeProjectManager.Entity.Project;
 import com.itlizeproject.ItlizeProjectManager.Entity.ProjectColumn;
 import com.itlizeproject.ItlizeProjectManager.Repository.ProjectColumnRepository;
+import com.itlizeproject.ItlizeProjectManager.Repository.ProjectRepository;
 import com.itlizeproject.ItlizeProjectManager.Service.ProjectColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import java.util.List;
 public class ProjectColumnServiceImp implements ProjectColumnService {
     @Autowired
     private ProjectColumnRepository repository;
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Override
     public ProjectColumn findById(Integer Id) {
@@ -33,6 +37,14 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
         ProjectColumn projectColumn = repository.findById(id).orElse(null);
         projectColumn.setColumnName(columnName);
         projectColumn.setFormulaText(formula);
+        return repository.save(projectColumn);
+    }
+
+    @Override
+    public ProjectColumn assignProject(Integer projectColumnId, Integer projectId) {
+        ProjectColumn projectColumn = repository.findById(projectId).orElse(null);
+        Project project = projectRepository.findById(projectId).orElse(null);
+        projectColumn.setProject(project);
         return repository.save(projectColumn);
     }
 
