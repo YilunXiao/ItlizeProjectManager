@@ -35,21 +35,21 @@ public class ResourceServiceImp implements ResourceService {
     }
 
     @Override
-    public Resource findName(String resourceName) throws Exception{
-        Resource resource = resourceRepository.findResourceByName(resourceName);
-        if (resource == null){
+    public List<Resource> findName(String resourceName) throws Exception{
+        List<Resource> resources = resourceRepository.findResourcesByName(resourceName);
+        if (resources == null){
             throw new Exception ("No resource found by name " + resourceName);
         }
-        return resource;
+        return resources;
     }
 
     @Override
-    public Resource findCode(String resourceCode) throws Exception{
-        Resource resource = resourceRepository.findResourceByResourceCode(resourceCode);
-        if (resource == null){
+    public List<Resource> findCode(String resourceCode) throws Exception{
+        List<Resource> resources = resourceRepository.findResourcesByResourceCode(resourceCode);
+        if (resources == null){
             throw new Exception ("No resource found by code " + resourceCode);
         }
-        return resource;
+        return resources;
     }
 
     @Override

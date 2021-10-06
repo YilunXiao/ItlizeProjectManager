@@ -42,9 +42,9 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
         //List<ProjectResource> rList = resource.getProjectResources();
         //rList.add(pr);
         //resource.setProjectResources(rList);
-        resourceRepository.saveAndFlush(resource);
-        projectRepository.saveAndFlush(project);
-        projectResourceRepository.saveAndFlush(pr);
+        //resourceRepository.saveAndFlush(resource);
+        //projectRepository.saveAndFlush(project);
+        projectResourceRepository.save(pr);
         return true;
     }
     public Integer findId(Integer projectId, Integer resourceId) throws Exception{
