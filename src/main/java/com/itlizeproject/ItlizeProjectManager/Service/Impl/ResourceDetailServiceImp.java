@@ -1,7 +1,11 @@
 package com.itlizeproject.ItlizeProjectManager.Service.Impl;
 
+import com.itlizeproject.ItlizeProjectManager.Entity.ProjectColumn;
+import com.itlizeproject.ItlizeProjectManager.Entity.Resource;
 import com.itlizeproject.ItlizeProjectManager.Entity.ResourceDetail;
+import com.itlizeproject.ItlizeProjectManager.Repository.ProjectColumnRepository;
 import com.itlizeproject.ItlizeProjectManager.Repository.ResourceDetailRepository;
+import com.itlizeproject.ItlizeProjectManager.Repository.ResourceRepository;
 import com.itlizeproject.ItlizeProjectManager.Service.ResourceDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,10 @@ import java.util.List;
 public class ResourceDetailServiceImp implements ResourceDetailService {
     @Autowired
     private ResourceDetailRepository repository;
+    @Autowired
+    private ResourceRepository resourceRepository;
+    @Autowired
+    private ProjectColumnRepository projectColumnRepository;
 
     @Override
     public ResourceDetail findById(Integer Id) {
@@ -23,7 +31,22 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
         return repository.findAll();
     }
 
-    //TODO
+    @Override
+    public ResourceDetail assignResource(Integer resourceDetailId, Integer resourceId) {
+        ResourceDetail resourceDetail = repository.getById(resourceDetailId);
+        Resource resource = resourceRepository.getById(resourceId);
+        resourceDetail.setResource(resource);
+        return repository.save(resourceDetail);
+    }
+
+    @Override
+    public ResourceDetail assignProjectColumn(Integer resourceDetailId, Integer projectColumnId) {
+        ResourceDetail resourceDetail = repository.getById(resourceDetailId);
+        ProjectColumn projectColumn = projectColumnRepository.getById(projectColumnId);
+        resourceDetail.setProjectColumn(projectColumn);
+        return repository.save(resourceDetail);
+    }
+
     @Override
     public List<ResourceDetail> findByResource(Integer resourceId) {
         return repository.findResourceDetailByResourceId(resourceId);

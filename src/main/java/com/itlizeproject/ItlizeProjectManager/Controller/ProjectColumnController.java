@@ -55,6 +55,13 @@ public class ProjectColumnController {
         return new ResponseEntity<>(service.update(id, name, formula), HttpStatus.OK);
     }
 
+    // assign a project
+    @PutMapping("/project_columns/project")
+    public ResponseEntity<ProjectColumn> assignProject(@RequestParam("projectColumnId") Integer projectColumnId,
+                                                       @RequestParam("projectId") Integer projectId) {
+        return new ResponseEntity<>(service.assignProject(projectColumnId, projectId), HttpStatus.OK);
+    }
+
     // delete a ProjectColumn
     @DeleteMapping("/project_columns")
     public void delete(@RequestParam("id") Integer id) {
