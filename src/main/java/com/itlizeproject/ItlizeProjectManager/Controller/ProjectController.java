@@ -147,7 +147,7 @@ public class ProjectController {
         try{
             User user = userService.findById(userId);
             List<Project> result = projectService.findByUser(user);
-            if (result == null)
+            if (result.size() == 0)
                 return new ResponseEntity<> ("The user has no project.", HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }catch (Exception e){
@@ -161,7 +161,7 @@ public class ProjectController {
         try{
             Project project = projectService.findOne(projectId);
             List<ProjectResource> result = projectResourceService.findByProject(project);
-            if (result == null)
+            if (result.size() == 0)
                 return new ResponseEntity<> ("The project doesn't use any resource.", HttpStatus.BAD_REQUEST);
             List<Resource> resources = new ArrayList<>();
             for (ProjectResource projectResource : result)
