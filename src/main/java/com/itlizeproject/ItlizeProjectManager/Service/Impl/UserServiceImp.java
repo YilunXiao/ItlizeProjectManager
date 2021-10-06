@@ -36,7 +36,6 @@ public class UserServiceImp implements UserService {
         user.setUserName(name);
         user.setPassword(password);
         user.setEmail(email);
-        user.setTimeCreated(new Date());
         repository.save(user);
         return user;
     }
@@ -62,6 +61,7 @@ public class UserServiceImp implements UserService {
         user.setUserName(name);
         user.setPassword(password);
         user.setEmail(email);
+        user.setTimeCreated(new Date());
         return repository.save(user);
     }
 }
