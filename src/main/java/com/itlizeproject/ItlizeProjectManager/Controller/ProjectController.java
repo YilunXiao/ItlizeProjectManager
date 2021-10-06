@@ -79,6 +79,17 @@ public class ProjectController {
         }
     }
 
+    //Update the amount
+    @PutMapping("addResource")
+    public ResponseEntity<?> updateAmount(@RequestParam Integer projectId, @RequestParam Integer resourceId, @RequestParam Integer amount) {
+        try{
+            projectResourceService.updateAmount(projectId, resourceId, amount);
+            Integer id = projectResourceService.findId(projectId, resourceId);
+            return new ResponseEntity<>(projectResourceService.findOne(id), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<> (e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
     //delete a project
     @DeleteMapping("/projects")
     public ResponseEntity<?> deleteProject(@RequestParam Integer id) {

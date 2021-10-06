@@ -1,19 +1,14 @@
 package com.itlizeproject.ItlizeProjectManager.Controller;
 
-//import com.itlizeproject.ItlizeProjectManager.Config.LimitConfig;
-import com.itlizeproject.ItlizeProjectManager.Entity.Project;
 import com.itlizeproject.ItlizeProjectManager.Entity.ProjectColumn;
 import com.itlizeproject.ItlizeProjectManager.Service.ProjectColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-//import sun.misc.Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ProjectColumnController {

@@ -10,6 +10,6 @@ import java.util.List;
 public interface ResourceRepository extends JpaRepository<Resource, Integer> {
     Resource findResourceById(Integer id);
     List<Resource> findAll();
-    Resource findResourceByName(String name);
-    Resource findResourceByResourceCode(String code);
+    List<Resource> findResourcesByName(String name);
+    List<Resource> findResourcesByResourceCode(String code);
 }
